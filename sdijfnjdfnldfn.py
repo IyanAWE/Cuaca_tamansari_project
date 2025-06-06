@@ -181,7 +181,7 @@ with col2:
         st.warning(f"⚠️ Gagal baca BMKG Real-Time: {e}")
         
 st.caption("Kiri: OpenWeather API | Kanan: BMKG OCR + Grafik. 🔁 Auto-refresh tiap 30 menit.")
-st.empty()
+st.write("")
 
 # Grafik suhu historis
 try:
