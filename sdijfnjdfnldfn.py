@@ -211,6 +211,7 @@ except Exception as e:
 
 st.write("")
 st.write("")
+st.write("")
 
 # Tampilkan data dalam bentuk tabel
 st.subheader("📊 Tabel Data Historis BMKG dan OpenWeather")
