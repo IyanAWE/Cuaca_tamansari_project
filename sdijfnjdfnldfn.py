@@ -180,19 +180,6 @@ with col2:
     except Exception as e:
         st.warning(f"⚠️ Gagal baca BMKG Real-Time: {e}")
 
-# Tampilkan data dalam bentuk tabel
-st.subheader("📊 Tabel Data Historis BMKG dan OpenWeather")
-st.write("**Data Historis OpenWeatherMap**")
-st.caption("Dikarenakan library streamlit yang digunakan untuk menampilkan tabel tidak bisa digunakan untuk membaca koma dari spreadsheet, maka:")
-st.caption("- Cara membaca data suhu adalah menambahkan koma/titik setelah 2 angka pertama. Contoh: 2566 = 25.66, 245 = 24.5")
-st.caption("- Kolom wind speed tidak diperlihatkan karena inkonsistensi pada pola numerik data, tidak seperti pada data suhu yang cenderung seragam.")
-df_openweather = get_google_sheet_data(OPENWEATHER_SPREADSHEET_ID)
-st.dataframe(df_openweather)  # Menampilkan data dari spreadsheet OpenWeather
-
-st.write("**Data Historis BMKG**")
-df_bmkg = ambil_data_bmkg_sheet()
-st.dataframe(df_bmkg)  # Menampilkan data BMKG yang sudah difilter
-
 # Grafik suhu historis
 try:
     df_open = pd.DataFrame(st.session_state['data_history'])
@@ -216,5 +203,18 @@ try:
 
 except Exception as e:
     st.warning(f"⚠️ Gagal tampilkan grafik suhu: {e}")
+
+# Tampilkan data dalam bentuk tabel
+st.subheader("📊 Tabel Data Historis BMKG dan OpenWeather")
+st.write("**Data Historis OpenWeatherMap**")
+st.caption("Dikarenakan library streamlit yang digunakan untuk menampilkan tabel tidak bisa digunakan untuk membaca koma dari spreadsheet, maka:")
+st.caption("- Cara membaca data suhu adalah menambahkan koma/titik setelah 2 angka pertama. Contoh: 2566 = 25.66, 245 = 24.5")
+st.caption("- Kolom wind speed tidak diperlihatkan karena inkonsistensi pada pola numerik data, tidak seperti pada data suhu yang cenderung seragam.")
+df_openweather = get_google_sheet_data(OPENWEATHER_SPREADSHEET_ID)
+st.dataframe(df_openweather)  # Menampilkan data dari spreadsheet OpenWeather
+
+st.write("**Data Historis BMKG**")
+df_bmkg = ambil_data_bmkg_sheet()
+st.dataframe(df_bmkg)  # Menampilkan data BMKG yang sudah difilter
 
 st.caption("🔁 Auto-refresh tiap 30 menit || Kiri: OpenWeather API • Kanan: BMKG OCR + Grafik")
