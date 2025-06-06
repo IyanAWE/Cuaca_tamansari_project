@@ -214,7 +214,9 @@ st.write("")
 
 # Tampilkan data dalam bentuk tabel
 st.subheader("📊 Tabel Data Historis BMKG dan OpenWeather")
-st.empty()
+st.write("")
+st.write("")
+
 st.write("**Data Historis OpenWeatherMap**")
 st.caption("Dikarenakan library streamlit yang digunakan untuk menampilkan tabel tidak bisa digunakan untuk membaca koma dari spreadsheet, maka:")
 st.caption("- Cara membaca data suhu adalah menambahkan koma/titik setelah 2 angka pertama. Contoh: 2566 = 25.66, 245 = 24.5")
@@ -233,4 +235,4 @@ st.dataframe(df_bmkg)  # Menampilkan data BMKG yang sudah difilter
 st.write("")
 st.write("")
 
-st.caption("-- Powered by openWeatherMap, BMKG, and Streamlit --")
+st.caption("⚡ Powered by OpenWeatherMap, BMKG, and Streamlit ⚡")
