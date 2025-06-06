@@ -179,6 +179,8 @@ with col2:
             st.info("Belum ada data dari BMKG.")
     except Exception as e:
         st.warning(f"⚠️ Gagal baca BMKG Real-Time: {e}")
+        
+st.caption("Kiri: OpenWeather API | Kanan: BMKG OCR + Grafik. 🔁 Auto-refresh tiap 30 menit.)")
 
 # Grafik suhu historis
 try:
@@ -217,4 +219,4 @@ st.write("**Data Historis BMKG**")
 df_bmkg = ambil_data_bmkg_sheet()
 st.dataframe(df_bmkg)  # Menampilkan data BMKG yang sudah difilter
 
-st.caption("🔁 Auto-refresh tiap 30 menit || Kiri: OpenWeather API • Kanan: BMKG OCR + Grafik")
+st.caption("-- Powered by openWeatherMap, BMKG, and Streamlit --")
