@@ -1,12 +1,12 @@
 # 🌧️ Real-Time Cuaca Tamansari, Bandung
 
-Aplikasi Streamlit untuk menampilkan cuaca real-time di kawasan Tamansari, Bandung. Data diambil dari [OpenWeather](https://openweathermap.org/) dan disimpan otomatis ke Google Sheets tiap 10 menit. Dirancang untuk monitoring kondisi lingkungan berbasis data.
+Aplikasi Streamlit untuk menampilkan cuaca real-time di kawasan Tamansari, Bandung. Data diambil dari [OpenWeather](https://openweathermap.org/) dan disimpan otomatis ke Google Sheets tiap 30 menit. Dirancang untuk monitoring kondisi lingkungan berbasis data.
 
 ---
 
 ## 🚀 Fitur Utama
 
-- 🔄 Auto-refresh data setiap 10 menit (tanpa reload manual)
+- 🔄 Auto-refresh data setiap 30 menit (tanpa reload manual)
 - 🌡️ Tampilkan data suhu, kelembapan, kecepatan angin, dan deskripsi cuaca
 - 📈 Visualisasi tren suhu dalam bentuk grafik
 - 🗂️ Simpan histori data ke Google Sheets (append, bukan overwrite)
@@ -59,9 +59,9 @@ streamlit run cuaca_tamansari_streamlit.py
 
 ---
 
-## 📊 Contoh Tampilan
+## 📊 Tampilan Dashboard
 
-![Tampilan Cuaca](https://user-images.githubusercontent.com/your-ss.png)
+Dashboard streamlit telah di-deploy di laman https://dexu3nftipxvp3yap2mmdw.streamlit.app/.
 
 ---
 
