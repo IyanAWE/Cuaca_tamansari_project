@@ -216,6 +216,7 @@ df_openweather = get_google_sheet_data(OPENWEATHER_SPREADSHEET_ID)
 st.dataframe(df_openweather)  # Menampilkan data dari spreadsheet OpenWeather
 
 st.write("**Data Historis BMKG**")
+st.caption("Sama seperti pada OpenWeatherMap di atas, nilai temperature berada dalam celsius (°C) dan humidity dalam persentase (%), dan windspeed dalam kmh.")  
 df_bmkg = ambil_data_bmkg_sheet()
 st.dataframe(df_bmkg)  # Menampilkan data BMKG yang sudah difilter
 
