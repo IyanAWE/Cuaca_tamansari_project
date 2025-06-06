@@ -180,7 +180,7 @@ with col2:
     except Exception as e:
         st.warning(f"⚠️ Gagal baca BMKG Real-Time: {e}")
         
-st.caption("Kiri: OpenWeather API | Kanan: BMKG OCR + Grafik. 🔁 Auto-refresh tiap 30 menit.)")
+st.caption("Kiri: OpenWeather API | Kanan: BMKG OCR + Grafik. 🔁 Auto-refresh tiap 30 menit.")
 
 # Grafik suhu historis
 try:
