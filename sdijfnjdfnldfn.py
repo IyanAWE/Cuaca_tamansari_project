@@ -181,6 +181,7 @@ with col2:
         st.warning(f"⚠️ Gagal baca BMKG Real-Time: {e}")
         
 st.caption("Kiri: OpenWeather API | Kanan: BMKG OCR + Grafik. 🔁 Auto-refresh tiap 30 menit.")
+st.empty()
 
 # Grafik suhu historis
 try:
@@ -206,8 +207,11 @@ try:
 except Exception as e:
     st.warning(f"⚠️ Gagal tampilkan grafik suhu: {e}")
 
+st.empty()
+
 # Tampilkan data dalam bentuk tabel
 st.subheader("📊 Tabel Data Historis BMKG dan OpenWeather")
+st.empty()
 st.write("**Data Historis OpenWeatherMap**")
 st.caption("Dikarenakan library streamlit yang digunakan untuk menampilkan tabel tidak bisa digunakan untuk membaca koma dari spreadsheet, maka:")
 st.caption("- Cara membaca data suhu adalah menambahkan koma/titik setelah 2 angka pertama. Contoh: 2566 = 25.66, 245 = 24.5")
@@ -215,9 +219,13 @@ st.caption("- Kolom wind speed tidak diperlihatkan karena inkonsistensi pada pol
 df_openweather = get_google_sheet_data(OPENWEATHER_SPREADSHEET_ID)
 st.dataframe(df_openweather)  # Menampilkan data dari spreadsheet OpenWeather
 
+st.empty()
+
 st.write("**Data Historis BMKG**")
-st.caption("Sama seperti pada OpenWeatherMap di atas, nilai temperature berada dalam celsius (°C) dan humidity dalam persentase (%), dan windspeed dalam kmh.")  
+st.caption("Sama seperti pada OpenWeatherMap di atas, nilai temperature berada dalam celsius (°C), humidity dalam persentase (%), dan windspeed dalam kmh.")  
 df_bmkg = ambil_data_bmkg_sheet()
 st.dataframe(df_bmkg)  # Menampilkan data BMKG yang sudah difilter
+
+st.empty()
 
 st.caption("-- Powered by openWeatherMap, BMKG, and Streamlit --")
