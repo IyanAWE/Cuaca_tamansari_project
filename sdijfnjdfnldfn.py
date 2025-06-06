@@ -28,7 +28,7 @@ API_KEY = st.secrets["OPENWEATHER_API_KEY"]
 wib = timezone("Asia/Jakarta")
 
 st.set_page_config(page_title="Cuaca Tamansari", page_icon="🌧️", layout="wide")
-st.title("🌧️ Dashboard Cuaca Tamansari: OpenWeather vs BMKG (OCR) fctghndrtdrhdrhj")
+st.title("🌧️ Dashboard Cuaca Tamansari: OpenWeather vs BMKG (OCR)")
 
 refresh_trigger = st_autorefresh(interval=900000, key="data_refresh")
 
@@ -179,42 +179,6 @@ with col2:
             st.info("Belum ada data dari BMKG.")
     except Exception as e:
         st.warning(f"⚠️ Gagal baca BMKG Real-Time: {e}")
-        
-st.caption("Kiri: OpenWeather API • Kanan: BMKG OCR + Grafik")
-
-df_bmkg = ambil_data_bmkg_sheet()
-# Ganti nama kolom setelah data diambil
-df_bmkg.rename(columns={
-    'Time': 'Waktu',
-    'Temperature': 'Suhu (°C)',
-    'Humidity': 'Kelembapan (%)',
-    'Weather': 'Cuaca',
-    'Wind_kmh': 'Kecepatan Angin (km/h)',
-}, inplace=True)
-
-# Grafik suhu historis
-try:
-    df_open = pd.DataFrame(st.session_state['data_history'])
-    df_open["Time"] = pd.to_datetime(df_open["Time"], errors='coerce')
-    df_open["Temperature"] = pd.to_numeric(df_open["Temperature"], errors='coerce')
-    df_open = df_open.dropna(subset=["Time", "Temperature"])
-
-    df_bmkg["Waktu"] = pd.to_datetime(df_bmkg["Waktu"], errors='coerce')
-    df_bmkg["Suhu"] = pd.to_numeric(df_bmkg["Suhu (°C)"], errors='coerce')
-    df_bmkg = df_bmkg.dropna(subset=["Waktu", "Suhu (°C)"])
-
-    st.subheader("📈 Grafik Suhu Historis (12 data terakhir)")
-
-    st.write("**OpenWeather**")
-    df_open["TimeLabel"] = df_open["Time"].dt.strftime("%H:%M")
-    st.line_chart(df_open.set_index("TimeLabel")[["Temperature"]].tail(12))
-
-    st.write("**BMKG (OCR)**")
-    df_bmkg["TimeLabel"] = df_bmkg["Waktu"].dt.strftime("%H:%M")
-    st.line_chart(df_bmkg.set_index("TimeLabel")[["Suhu (°C)"]].tail(12))
-
-except Exception as e:
-    st.warning(f"⚠️ Gagal tampilkan grafik suhu: {e}")
 
 # Tampilkan data dalam bentuk tabel
 st.subheader("📊 Tabel Data Historis BMKG dan OpenWeather")
@@ -226,6 +190,31 @@ df_openweather = get_google_sheet_data(OPENWEATHER_SPREADSHEET_ID)
 st.dataframe(df_openweather)  # Menampilkan data dari spreadsheet OpenWeather
 
 st.write("**Data Historis BMKG**")
+df_bmkg = ambil_data_bmkg_sheet()
 st.dataframe(df_bmkg)  # Menampilkan data BMKG yang sudah difilter
 
-st.caption("🔁 Pengambilan data dilakukan secara auto-refresh tiap 30 menit.")
+# Grafik suhu historis
+try:
+    df_open = pd.DataFrame(st.session_state['data_history'])
+    df_open["Time"] = pd.to_datetime(df_open["Time"], errors='coerce')
+    df_open["Temperature"] = pd.to_numeric(df_open["Temperature"], errors='coerce')
+    df_open = df_open.dropna(subset=["Time", "Temperature"])
+
+    df_bmkg["Time"] = pd.to_datetime(df_bmkg["Time"], errors='coerce')
+    df_bmkg["Temperature"] = pd.to_numeric(df_bmkg["Temperature"], errors='coerce')
+    df_bmkg = df_bmkg.dropna(subset=["Time", "Temperature"])
+
+    st.subheader("📈 Grafik Suhu Historis (12 data terakhir)")
+
+    st.write("**OpenWeather**")
+    df_open["TimeLabel"] = df_open["Time"].dt.strftime("%H:%M")
+    st.line_chart(df_open.set_index("TimeLabel")[["Temperature"]].tail(12))
+
+    st.write("**BMKG (OCR)**")
+    df_bmkg["TimeLabel"] = df_bmkg["Time"].dt.strftime("%H:%M")
+    st.line_chart(df_bmkg.set_index("TimeLabel")[["Temperature"]].tail(12))
+
+except Exception as e:
+    st.warning(f"⚠️ Gagal tampilkan grafik suhu: {e}")
+
+st.caption("🔁 Auto-refresh tiap 30 menit || Kiri: OpenWeather API • Kanan: BMKG OCR + Grafik")
