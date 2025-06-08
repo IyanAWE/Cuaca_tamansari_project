@@ -30,7 +30,7 @@ wib = timezone("Asia/Jakarta")
 st.set_page_config(page_title="Cuaca Tamansari", page_icon="🌧️", layout="wide")
 st.title("🌧️ Dashboard Cuaca Tamansari: OpenWeather vs BMKG (OCR)")
 
-refresh_trigger = st_autorefresh(interval=900000, key="data_refresh")
+refresh_trigger = st_autorefresh(interval=1800000, key="data_refresh")
 
 if 'data_history' not in st.session_state:
     st.session_state['data_history'] = []
